@@ -28,12 +28,34 @@ allProjects = projectModule.getProjects();
 console.log("After adding todo in home project:", allProjects);
 // Delete todo from Hobbies
 const hobbiesProject = allProjects.find((p) => p.name === "Hobbies");
-console.table(hobbiesProject.todos)
-const todoToDelete = hobbiesProject.todos.find((t) => t.title === "Read a book");
-console.log(todoToDelete)
+console.table(hobbiesProject.todos);
+const todoToDelete = hobbiesProject.todos.find(
+  (t) => t.title === "Read a book"
+);
+console.log(todoToDelete);
 if (todoToDelete) {
   todoModule.deleteTodo(hobbiesProject.id, todoToDelete.id);
 }
 allProjects = projectModule.getProjects();
 console.log("After deletion in hobbies:", allProjects);
 
+// change complete status of 'Paint landscape'
+const todolandscpe = hobbiesProject.todos.find(
+  (t) => t.title === "Paint landscape"
+);
+console.log(todolandscpe);
+
+if (todolandscpe) {
+  todoModule.toggleCompleted(hobbiesProject.id, todolandscpe.id);
+}
+
+allProjects = projectModule.getProjects();
+console.table( hobbiesProject.todos);
+
+
+//update todo
+
+todoModule.updateTodo(hobbiesProject.id, todolandscpe.id,{priority:"low"})
+
+allProjects = projectModule.getProjects();
+console.table( hobbiesProject.todos);

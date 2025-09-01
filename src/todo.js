@@ -1,5 +1,3 @@
-import { createProjects } from "./project";
-
 export function createTodo(getProjects) {
   function addTodo(projectId, todoObj) {
     const project = getProjects().find((project) => project.id === projectId);
@@ -9,9 +7,23 @@ export function createTodo(getProjects) {
       : console.log(" no such project");
   }
 
-  // function updateTodo(projectId, todoId, updatedData) {
+  function updateTodo(projectId, todoId, updatedData) {
+    const project = getProjects().find((project) => project.id === projectId);
 
-  // }
+    if (!project) {
+      console.log("No such project");
+      return;
+    }
+    const todo = project.todos.find((todo) => todo.id === todoId);
+
+    if (!todo) {
+      console.log("No such todo");
+      return;
+    }
+    // Update the existing todo object directly
+    Object.assign(todo, updatedData);
+    console.log("Todo updated:", todo);
+  }
 
   function deleteTodo(projectId, todoId) {
     const project = getProjects().find((project) => project.id === projectId);
@@ -21,15 +33,21 @@ export function createTodo(getProjects) {
       console.log("No such project");
     }
   }
-
-  // function toggleCompleted(projectId, todoId) {
-  // //→ mark complete/incomplete
-  // }
+  function toggleCompleted(projectId, todoId) {
+    // mark complete/incomplete
+    const project = getProjects().find((project) => project.id === projectId);
+    if (project) {
+      let todo = project.todos.find((todo) => todo.id === todoId);
+      if (todo) {
+        todo.completed = !todo.completed; // flip true/false
+      }
+    }
+  }
 
   return {
     addTodo,
-    // ,updateTodo,
+    updateTodo,
     deleteTodo,
-    //toggleCompleted
+    toggleCompleted,
   };
 }
