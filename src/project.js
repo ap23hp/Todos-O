@@ -2,7 +2,20 @@ export function createProjects() {
   let projects = [
     {
       name: "Fitness",
-      todos: [],
+      todos: [
+        {
+          title: "Morning run",
+          completed: false,
+          dueDate: "22 Sept",
+          priority: "High",
+        },
+        {
+          title: "Yoga session",
+          completed: false,
+          dueDate: "23 Sept",
+          priority: "Low",
+        },
+      ],
       id: crypto.randomUUID(),
     },
     {
@@ -30,25 +43,6 @@ export function createProjects() {
       id: crypto.randomUUID(),
     },
   ];
-
-  // const projects = [
-  //   {
-  //     name: "Fitness",
-  //     todos: [
-  //       { title: "Morning jog", completed: false, priority: "high" },
-  //       { title: "Yoga session", completed: true, priority: "medium" },
-  //       { title: "Meal prep", completed: false, priority: "low" },
-  //     ],
-  //   },
-  //   {
-  //     name: "Hobbies",
-  //     todos: [
-  //       { title: "Read a book", completed: true, priority: "medium" },
-  //       { title: "Paint landscape", completed: false, priority: "high" },
-  //       { title: "Practice guitar", completed: false, priority: "medium" },
-  //     ],
-  //   },
-  // ];
 
   function addnameProject(projectname, id) {
     const project = projects.some((project) => project.name == projectname);

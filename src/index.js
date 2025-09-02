@@ -1,8 +1,14 @@
 import { createProjects } from "./project";
 import { createTodo } from "./todo";
-const projectModule = createProjects();
+import { renderProjects } from "./dom";
+//import { renderTodos } from "./dom";
+
+import './style.css';
+ export const projectModule = createProjects();
 projectModule.addnameProject("Home");
 projectModule.addnameProject("Work");
+ 
+
 
 let allProjects = projectModule.getProjects();
 console.log("Before deletion:", allProjects);
@@ -16,7 +22,7 @@ projectModule.deleteProject(idTodelet);
 allProjects = projectModule.getProjects();
 console.log("After deletion:", allProjects);
 
-const todoModule = createTodo(projectModule.getProjects);
+export const todoModule = createTodo(projectModule.getProjects);
 // Add todo to Home
 const homeProject = allProjects.find((p) => p.name === "Home");
 todoModule.addTodo(homeProject.id, {
@@ -24,6 +30,26 @@ todoModule.addTodo(homeProject.id, {
   dueDate: "22 sept",
   priority: "low",
 });
+todoModule.addTodo(homeProject.id, {
+  title: "Clean garage",
+  dueDate: "23 Sept",
+  priority: "Medium",
+});
+
+// Add todos to Work
+const workProject = allProjects.find((p) => p.name === "Work");
+todoModule.addTodo(workProject.id, {
+  title: "Prepare presentation",
+  dueDate: "25 Sept",
+  priority: "High",
+});
+todoModule.addTodo(workProject.id, {
+  title: "Send client email",
+  dueDate: "24 Sept",
+  priority: "Medium",
+});
+
+
 allProjects = projectModule.getProjects();
 console.log("After adding todo in home project:", allProjects);
 // Delete todo from Hobbies
@@ -58,4 +84,7 @@ console.table( hobbiesProject.todos);
 todoModule.updateTodo(hobbiesProject.id, todolandscpe.id,{priority:"low"})
 
 allProjects = projectModule.getProjects();
-console.table( hobbiesProject.todos);
+console.table( allProjects);
+
+renderProjects()
+//renderTodos(projectModule.getProjects())

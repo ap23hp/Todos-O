@@ -13,7 +13,8 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/template.html',   // tumhara original html
-      filename: 'index.html'
+      filename: 'index.html',
+       scriptLoading: 'defer' 
     }),
   ],
   module: {
