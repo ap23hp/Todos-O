@@ -1,5 +1,7 @@
 import { projectModule } from "./index";
 import { todoModule } from "./index";
+import { format ,parseISO} from 'date-fns';
+import { renderHeader } from "./header";
 let container = document.querySelector(".container");
 console.log(container)
         const dialog = document.querySelector(".dialog");
@@ -40,7 +42,14 @@ export function renderProjects() {
 
       const spanDuedate = document.createElement("span");
       spanDuedate.classList.add("duedate-span");
-      spanDuedate.textContent = todo.dueDate || ""; // in case undefined
+   let formattedDate = "";
+if (todo.dueDate) {
+  const parsedDate = parseISO(todo.dueDate);
+  if (!isNaN(parsedDate)) {
+    formattedDate = format(parsedDate, "MMM d, yyyy");
+  }
+}
+spanDuedate.textContent = formattedDate;
 
       listItem.appendChild(spanCompleted);
       listItem.appendChild(spanDuedate);
@@ -104,7 +113,7 @@ export function renderProjects() {
 
         // Pre-fill
         titleInput.value = todo.title;
-        dateInput.value = todo.dueDate;
+        dateInput.value = todo.dueDate
         prioritySelect.value = todo.priority;
 
         // Buttons
@@ -156,3 +165,5 @@ export function renderProjects() {
     container.appendChild(div);
   });
 }
+
+renderHeader()

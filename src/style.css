@@ -1,4 +1,48 @@
 /* Project container */
+
+header {
+     position: sticky;
+  top: 0; /* sticks to the very top */
+  z-index: 1000; /* stays above other elements */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: linear-gradient(135deg, #4e54c8, #8f94fb); /* nice gradient */
+  padding: 1rem 2rem;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  color: white;
+}
+
+header .main-heading {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+header button {
+  background-color: #ffffff;
+  color: #4e54c8;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+header button:hover {
+  background-color: #f1f1f1;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+.container {
+  padding-top: 80px; /* adjust based on header height */
+  max-width: 900px;
+  margin: 0 auto;
+}
+
 .container > div {
   border: 1px solid #ccc;
   padding: 12px;
@@ -45,16 +89,16 @@ li button {
 
 /* Edit button */
 li button:nth-child(1) {
-  background-color: #2196F3; /* blue */
+  background-color:#4e54c8;; /* blue */
   color: white;
 }
 li button:nth-child(1):hover {
-  background-color: #1976d2;
+  background-color: #3f44a1;
 }
 
 /* Mark Complete button */
 li button:nth-child(2) {
-  background-color: #4CAF50; /* green */
+background-color: #4caf50;
   color: white;
 }
 li button:nth-child(2):hover {
@@ -80,6 +124,7 @@ li button:nth-child(3):hover {
 .priority-span {
   font-weight: bold;
   color: #d9534f; /* red for high priority */
+  font-size: medium;
 }
 
 /* Due date span */

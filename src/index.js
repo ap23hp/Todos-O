@@ -27,12 +27,12 @@ export const todoModule = createTodo(projectModule.getProjects);
 const homeProject = allProjects.find((p) => p.name === "Home");
 todoModule.addTodo(homeProject.id, {
   title: "change curtains",
-  dueDate: "22 sept",
+   dueDate:"2025-09-02"   ,
   priority: "low",
 });
 todoModule.addTodo(homeProject.id, {
   title: "Clean garage",
-  dueDate: "23 Sept",
+   dueDate:"2025-09-02"   ,
   priority: "Medium",
 });
 
@@ -40,12 +40,12 @@ todoModule.addTodo(homeProject.id, {
 const workProject = allProjects.find((p) => p.name === "Work");
 todoModule.addTodo(workProject.id, {
   title: "Prepare presentation",
-  dueDate: "25 Sept",
+   dueDate:"2025-09-02"   ,
   priority: "High",
 });
 todoModule.addTodo(workProject.id, {
   title: "Send client email",
-  dueDate: "24 Sept",
+   dueDate:"2025-09-02"   ,
   priority: "Medium",
 });
 
