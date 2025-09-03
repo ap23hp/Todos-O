@@ -1,3 +1,4 @@
+import { saveProjects } from "./storage";
 export function createProjects() {
   let projects = [
     {
@@ -67,19 +68,21 @@ function addnameProject(projectname) {
 
   projects.push(newProject);
   console.log(projects);
-
+saveProjects(projects)
   return newProject.id; // return the new project's ID
 }
 
   function deleteProject(id) {
     projects = projects.filter((project) => project.id !== id);
+  saveProjects(projects)
     return projects;
   }
   function getProjects() {
+
     return projects;
   }
 
-  function gettodos() {}
+
   return {
     addnameProject,
     getProjects,
