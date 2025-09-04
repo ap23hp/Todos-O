@@ -116,7 +116,7 @@ header button:hover {
   gap: 4px; /* spacing between row and notes */
   margin-bottom: 6px;
   padding: 6px;
-  background-color: #fff;
+  background-color:#d9f0f0;
   border-radius: 4px;
   font-size: large;
 }
@@ -274,4 +274,19 @@ li button:nth-child(3):hover {
   box-sizing: border-box; /* include padding in width */
   word-wrap: break-word; /* wrap long words */
   overflow-wrap: break-word;
+}
+.plus-notes-btn {
+  background-color: #83c5be;
+  color: #073b4c; /* dark text for contrast */
+  border: none;
+  border-radius: 4px;
+  padding: 2px 6px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-left: 5px;
+  transition: background 0.2s;
+}
+
+.plus-notes-btn:hover {
+  background-color: #5aa79a;
 }

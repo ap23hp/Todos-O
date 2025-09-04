@@ -2,8 +2,12 @@ import { createProjects } from "./project";
 import { createTodo } from "./todo";
 import { renderProjects } from "./dom";
 import { loadProjects, saveProjects } from "./storage";
-
+import { renderTodos } from "./dom";
 import './style.css';
+import { filterToday, filterTomorrow, filterUpcoming, 
+  filterOverdue, filterCompleted, filterByPriority, searchTodos } from './filter.js';
+
+
 
 // 1️Load projects from localStorage (if any)
 let projectsFromStorage = loadProjects();
@@ -25,9 +29,42 @@ renderProjects();
 
 
 
+document.querySelector('#today').addEventListener('click', () => {
+const allTodos = projectModule.getProjects().flatMap(project =>
+    project.todos.map(todo => ({ ...todo, projectId: project.id }))
+  );
+  const todaysTodos = filterToday(allTodos);
+  renderTodos(todaysTodos);
+});
+document.querySelector('#tomorrow').addEventListener('click', () => {
+  const allTodos = projectModule.getProjects().flatMap(p => p.todos);
+  const tomorrowsTodos = filterTomorrow(allTodos);
+  renderTodos(tomorrowsTodos);
+});
+
+document.querySelector('#upcoming').addEventListener('click', () => {
+  const allTodos = projectModule.getProjects().flatMap(p => p.todos);
+  const upcomingTodos = filterUpcoming(allTodos); // <-- use correct filter
+  renderTodos(upcomingTodos);
+});
+
+document.querySelector('#completed').addEventListener('click', () => {
+  const allTodos = projectModule.getProjects().flatMap(p => p.todos);
+  const upcomingTodos = filterCompleted(allTodos); // <-- use correct filter
+  renderTodos(upcomingTodos);
+});
+
+document.querySelector('#overdue').addEventListener('click', () => {
+  const allTodos = projectModule.getProjects().flatMap(p => p.todos);
+  const upcomingTodos = filterOverdue(allTodos); // <-- use correct filter
+  renderTodos(upcomingTodos);
+});
 
 
-
+const allProjectsBtn = document.querySelector('#all-projects');
+allProjectsBtn.addEventListener('click', () => {
+    renderProjects();
+});
 
 // // Initialize project module
 // export const projectModule = createProjects();
