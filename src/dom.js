@@ -1,11 +1,11 @@
 import { projectModule } from "./index";
 import { todoModule } from "./index";
-import { format ,parseISO} from 'date-fns';
+import { format, parseISO } from "date-fns";
 import { renderHeader } from "./header";
 let container = document.querySelector(".container");
-console.log(container)
-        const dialog = document.querySelector(".dialog");
-        console.log(document.querySelector(".dialog")); // should NOT be null
+console.log(container);
+const dialog = document.querySelector(".dialog");
+console.log(document.querySelector(".dialog")); // should NOT be null
 export function renderProjects() {
   const projects = projectModule.getProjects();
   container.innerHTML = ""; // clear old stuff before re-rendering
@@ -23,15 +23,25 @@ export function renderProjects() {
       const editbtn = document.createElement("button");
       const completebtn = document.createElement("button");
       const deletebtn = document.createElement("button");
+      const plusNotesBtn=document.createElement("button");
       editbtn.textContent = "Edit";
       completebtn.textContent = "Mark Complete";
       deletebtn.textContent = "Delete";
+      plusNotesBtn.textContent="+"
 
       const listItem = document.createElement("li");
-      listItem.textContent = todo.title + " "; // show title
-      listItem.appendChild(editbtn);
-      listItem.appendChild(completebtn);
-      listItem.appendChild(deletebtn);
+      const todomainrowDiv=document.createElement("div");
+      todomainrowDiv.classList.add("todo-main-row")
+      //notes
+      const divNotes = document.createElement("div");
+      divNotes.classList.add("notes-container");
+      divNotes.textContent = `notes : ${todo.notes || "—"}`;
+    divNotes.style.display = "none";
+      todomainrowDiv.textContent = todo.title + " "; // show title
+      todomainrowDiv.appendChild(editbtn);
+      todomainrowDiv.appendChild(completebtn);
+      todomainrowDiv.appendChild(deletebtn);
+      
       const spanCompleted = document.createElement("span");
       spanCompleted.classList.add("completed-span");
       spanCompleted.textContent = todo.completed ? "✅" : "❌";
@@ -42,20 +52,25 @@ export function renderProjects() {
 
       const spanDuedate = document.createElement("span");
       spanDuedate.classList.add("duedate-span");
-   let formattedDate = "";
-if (todo.dueDate) {
-  const parsedDate = parseISO(todo.dueDate);
-  if (!isNaN(parsedDate)) {
-    formattedDate = format(parsedDate, "MMM d, yyyy");
-  }
-}
-spanDuedate.textContent = formattedDate;
+      let formattedDate = "";
+      if (todo.dueDate) {
+        const parsedDate = parseISO(todo.dueDate);
+        if (!isNaN(parsedDate)) {
+          formattedDate = format(parsedDate, "MMM d, yyyy");
+        }
+      }
+      spanDuedate.textContent = formattedDate;
 
-      listItem.appendChild(spanCompleted);
-      listItem.appendChild(spanDuedate);
-      listItem.appendChild(spanPriority);
+      todomainrowDiv.appendChild(spanCompleted);
+      todomainrowDiv.appendChild(spanDuedate);
+      todomainrowDiv.appendChild(spanPriority);
+      todomainrowDiv.appendChild(plusNotesBtn);
+      listItem.appendChild(todomainrowDiv);
+      listItem.appendChild(divNotes)
       ul.appendChild(listItem);
-
+plusNotesBtn.addEventListener("click",function(){
+   divNotes.style.display = divNotes.style.display === "none" ? "block" : "none";
+})
       completebtn.addEventListener("click", function () {
         console.log("cliked");
         todoModule.toggleCompleted(project.id, todo.id);
@@ -90,7 +105,15 @@ spanDuedate.textContent = formattedDate;
         titleInput.type = "text";
         titleInput.name = "title";
         titleInput.required = true;
+        //notes
+        const descLabel = document.createElement("label");
+        descLabel.textContent = "Description:";
 
+        const descInput = document.createElement("textarea");
+        descInput.name = "description";
+        descInput.rows = 4; // adjust height
+        descInput.cols = 30; // adjust width
+        descInput.placeholder = "Add notes or details about this task...";
         // Due Date
         const dateLabel = document.createElement("label");
         dateLabel.textContent = "Due Date:";
@@ -113,7 +136,7 @@ spanDuedate.textContent = formattedDate;
 
         // Pre-fill
         titleInput.value = todo.title;
-        dateInput.value = todo.dueDate
+        dateInput.value = todo.dueDate;
         prioritySelect.value = todo.priority;
 
         // Buttons
@@ -130,6 +153,9 @@ spanDuedate.textContent = formattedDate;
         form.append(
           titleLabel,
           titleInput,
+          document.createElement("br"),
+          descLabel,
+          descInput,
           document.createElement("br"),
           dateLabel,
           dateInput,
@@ -148,6 +174,7 @@ spanDuedate.textContent = formattedDate;
           e.preventDefault();
           const updatedData = {
             title: titleInput.value,
+            notes: descInput.value,
             dueDate: dateInput.value,
             priority: prioritySelect.value,
           };
@@ -166,4 +193,4 @@ spanDuedate.textContent = formattedDate;
   });
 }
 
-renderHeader()
+renderHeader();

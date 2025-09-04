@@ -2,10 +2,11 @@ import { saveProjects } from "./storage";
 export function createProjects() {
   let projects = [
     {
-      name: "Fitness",
+      name: "General",
       todos: [
         {
           title: "Morning run",
+          notes:"wake up at 5 in morning and do not forget to take water bottle",
           completed: false,
           dueDate: "2025-09-02",
           priority: "High",
@@ -13,6 +14,7 @@ export function createProjects() {
         },
         {
           title: "Yoga session",
+          notes:"yogamat has to be taken",
           completed: false,
           dueDate: "2025-09-02",
           priority: "Low",
@@ -21,33 +23,33 @@ export function createProjects() {
       ],
       id: crypto.randomUUID(),
     },
-    {
-      name: "Hobbies",
-      todos: [
-        {
-          title: "Read a book",
-          completed: true,
-          priority: "medium",
-          dueDate: "2025-09-02",
-          id: crypto.randomUUID(),
-        },
-        {
-          title: "Paint landscape",
-          dueDate: "2025-09-02",
-          completed: false,
-          priority: "high",
-          id: crypto.randomUUID(),
-        },
-        {
-          title: "Practice guitar",
-          dueDate: "2025-09-02",
-          completed: false,
-          priority: "medium",
-          id: crypto.randomUUID(),
-        },
-      ],
-      id: crypto.randomUUID(),
-    },
+    // {
+    //   name: "Hobbies",
+    //   todos: [
+    //     {
+    //       title: "Read a book",
+    //       completed: true,
+    //       priority: "medium",
+    //       dueDate: "2025-09-02",
+    //       id: crypto.randomUUID(),
+    //     },
+    //     {
+    //       title: "Paint landscape",
+    //       dueDate: "2025-09-02",
+    //       completed: false,
+    //       priority: "high",
+    //       id: crypto.randomUUID(),
+    //     },
+    //     {
+    //       title: "Practice guitar",
+    //       dueDate: "2025-09-02",
+    //       completed: false,
+    //       priority: "medium",
+    //       id: crypto.randomUUID(),
+    //     },
+    //   ],
+    //   id: crypto.randomUUID(),
+    // },
   ];
 
 function addnameProject(projectname) {

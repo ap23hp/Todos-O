@@ -1,18 +1,63 @@
-/* Project container */
-
-header {
-     position: sticky;
-  top: 0; /* sticks to the very top */
-  z-index: 1000; /* stays above other elements */
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  background: linear-gradient(135deg, #4e54c8, #8f94fb); /* nice gradient */
-  padding: 1rem 2rem;
-  border-radius: 0 0 12px 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-  color: white;
+:root {
+  --header-bg: #006d77; /* Deep Teal */
+  --sidebar-bg: #edf6f9; /* Soft Aqua White */
+  --hover-bg: #789a9c; /* Seafoam Green */
+  --text-color: #073b4c; /* Dark Navy Teal */
 }
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Sticky Header */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--header-bg);
+  color: #fff;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 70px; /* height of your header (adjust if needed) */
+  left: 0;
+  width: 220px;
+  height: calc(100% - 70px); /* full height minus header */
+  background: var(--sidebar-bg);
+  border-right: 1px solid #ddd;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+/* Sidebar Buttons */
+.sidebar-btn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 0.6rem;
+  background: var(--header-bg);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.sidebar-btn:hover {
+  background: var(--hover-bg);
+}
+
+/* Main Container */
+
+/* Project container */
 
 header .main-heading {
   font-size: 1.8rem;
@@ -35,12 +80,12 @@ header button {
 header button:hover {
   background-color: #f1f1f1;
   transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 .container {
-  padding-top: 80px; /* adjust based on header height */
-  max-width: 900px;
-  margin: 0 auto;
+  margin-left: 240px; /* space for sidebar */
+  padding: 1.5rem;
+  margin-top: 70px; /* push below header */
 }
 
 .container > div {
@@ -67,14 +112,21 @@ header button:hover {
 /* Todo item */
 .container li {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column; /* stack children vertically */
+  gap: 4px; /* spacing between row and notes */
   margin-bottom: 6px;
-  padding: 4px;
+  padding: 6px;
   background-color: #fff;
   border-radius: 4px;
   font-size: large;
+}
 
+/* Row that holds title, priority, date, and buttons */
+.todo-main-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 /* Buttons inside each todo item */
 li button {
@@ -89,7 +141,7 @@ li button {
 
 /* Edit button */
 li button:nth-child(1) {
-  background-color:#4e54c8;; /* blue */
+  background-color: #4e54c8; /* blue */
   color: white;
 }
 li button:nth-child(1):hover {
@@ -98,7 +150,7 @@ li button:nth-child(1):hover {
 
 /* Mark Complete button */
 li button:nth-child(2) {
-background-color: #4caf50;
+  background-color: #4caf50;
   color: white;
 }
 li button:nth-child(2):hover {
@@ -142,6 +194,10 @@ li button:nth-child(3):hover {
   max-width: 90%;
   background-color: #fff;
   font-family: Arial, sans-serif;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /* Form inside dialog */
@@ -204,4 +260,18 @@ li button:nth-child(3):hover {
 }
 .dialog::backdrop {
   background: rgba(0, 0, 0, 0.4); /* dark overlay */
+}
+.notes-container {
+  display: none; /* hidden by default */
+  margin-top: 0.5rem; /* spacing from todo title/priority */
+  padding: 0.5rem 0.8rem;
+  border-left: 3px solid #83c5be; /* subtle accent */
+  font-size: 0.9rem;
+  color: #073b4c;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  width: 100%; /* full width of parent */
+  box-sizing: border-box; /* include padding in width */
+  word-wrap: break-word; /* wrap long words */
+  overflow-wrap: break-word;
 }

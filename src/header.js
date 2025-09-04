@@ -46,7 +46,7 @@ export function renderHeader() {
     newProjectInput.placeholder = "Add name of new Project";
     newProjectInput.required = true;
     newProjectInput.style.display = "none"; // hide by default
-newProjectInput.required = false; // default
+    newProjectInput.required = false; // default
     // Title
     const titleLabel = document.createElement("label");
     titleLabel.textContent = "Title:";
@@ -54,7 +54,15 @@ newProjectInput.required = false; // default
     titleInput.type = "text";
     titleInput.name = "title";
     titleInput.required = true;
+    //notes
+    const descLabel = document.createElement("label");
+    descLabel.textContent = "Description:";
 
+    const descInput = document.createElement("textarea");
+    descInput.name = "description";
+    descInput.rows = 4; // adjust height
+    descInput.cols = 30; // adjust width
+    descInput.placeholder = "Add notes or details about this task...";
     // Due Date
     const dateLabel = document.createElement("label");
     dateLabel.textContent = "Due Date:";
@@ -94,6 +102,9 @@ newProjectInput.required = false; // default
       titleLabel,
       titleInput,
       document.createElement("br"),
+      descLabel,
+      descInput,
+      document.createElement("br"),
       dateLabel,
       dateInput,
       document.createElement("br"),
@@ -131,7 +142,7 @@ newProjectInput.required = false; // default
         projectSelect.innerHTML = ""; // clear all
         projectModule.getProjects().forEach((project) => {
           const option = document.createElement("option");
-       option.value = project.id; // use ID
+          option.value = project.id; // use ID
           option.textContent = project.name;
           projectSelect.appendChild(option);
         });
@@ -145,18 +156,19 @@ newProjectInput.required = false; // default
         // Select the newly added project
         projectSelect.value = projectId;
       } else {
-       // find the project by name and get its id
-    const selectedProject = projectModule.getProjects().find(
-        (proj) => proj.name.toLowerCase() === projectSelect.value
-    );
-    projectId = selectedProject.id;
+        // find the project by name and get its id
+        const selectedProject = projectModule
+          .getProjects()
+          .find((proj) => proj.name.toLowerCase() === projectSelect.value);
+        projectId = selectedProject.id;
       }
 
       const todoObj = {
         title: titleInput.value,
+        notes:descInput.value,
         dueDate: dateInput.value,
         priority: prioritySelect.value,
-         id: crypto.randomUUID(), // unique todo id
+        id: crypto.randomUUID(), // unique todo id
       };
 
       todoModule.addTodo(projectId, todoObj);
